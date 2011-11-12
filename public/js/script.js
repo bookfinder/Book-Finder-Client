@@ -15,6 +15,10 @@ $('#form_search').submit(function(e) {
     
     success: function(data, status){
       console.dir(data);
+      for(item in data.results){
+        console.dir(data.results[item]);
+      }
+      
     },
     error: function(XHR, textStatus, errorThrown){
       console.log(textStatus);
