@@ -19,10 +19,16 @@
 
   <div id="container">
     <header>
-      Header
+      Trouver un livre
     </header>
     <div id="main" role="main">
-      
+      <form action="/">
+        <input type="text" name="keywords" id="keywords" />
+      </form>
+      <a href="Plus d'options" class="show-options"></a>
+      <div class="options">
+         
+      </div>
     </div>
     <footer>
 
