@@ -37,6 +37,14 @@ $('#form_search').submit(function(e) {
   return false;
 });
 
+$(function(){
+	$('.provider-icon').each(function()
+	{
+		$(this).twipsy();		
+	});
+	
+});
+
 // ------------------------------------------------
 // Geolocalisation
 // ------------------------------------------------
@@ -82,7 +90,7 @@ if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude'))
 }
 else
 {
-	alert($.cookie('coords-latitude') + ' : ' + $.cookie('coords-longitude'));
+	//alert($.cookie('coords-latitude') + ' : ' + $.cookie('coords-longitude'));
 }
 
 
