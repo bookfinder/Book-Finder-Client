@@ -48,6 +48,13 @@
 		}
 	}
 }
+#results-loading
+{
+	line-height:100px;
+	height:100px;
+	width:100%;
+	background:url(../img/ajax-loader.gif) no-repeat center center;
+}
 #results
 {
 	.result-row

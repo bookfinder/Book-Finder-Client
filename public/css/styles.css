@@ -31,6 +31,12 @@
       float: left;
       margin-right: 12px; }
 
+#results-loading {
+  line-height: 100px;
+  height: 100px;
+  width: 100%;
+  background: url(../img/ajax-loader.gif) no-repeat center center; }
+
 #results .result-row {
   background: url(../img/line-arrow.png) no-repeat center right;
   padding-right: 20px;
