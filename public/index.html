@@ -24,6 +24,13 @@
     </header>
     <div id="main" role="main">
       <form id="form_search" action="">
+<div class="container">
+  <div class="page-header">
+    <h1>Trouver un livre</h1>
+  </div>
+  <div class="row">
+    <div class="span10">
+      <form id="form_search" action="/">
         <input type="text" name="keywords" id="keywords" />
         <input type="submit" name="search" id="search">
       </form>
@@ -32,12 +39,17 @@
          
       </div>
     </div>
-    <footer>
-
-    </footer>
+    <div class="span4">
+      <div class="results">GO</div>
+    </div>
   </div>
+  <div class="row">
+    <!-- résultats -->
+  </div>
+</div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script defer src="js/jquery.cookie.js"></script>
 
   <script defer src="js/script.js"></script>
 
@@ -45,6 +57,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  
+
 </body>
 </html>
