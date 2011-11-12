@@ -19,11 +19,12 @@
 
 <body>
 
-  <div id="container">
-    <header>
-      Trouver un livre
-    </header>
-    <div id="main" role="main">
+<div class="container">
+  <div class="page-header">
+    <h1>Trouver un livre</h1>
+  </div>
+  <div class="row">
+    <div class="span10">
       <form action="/">
         <input type="text" name="keywords" id="keywords" />
       </form>
@@ -32,10 +33,14 @@
          
       </div>
     </div>
-    <footer>
-
-    </footer>
+    <div class="span4">
+      <div class="results">GO</div>
+    </div>
   </div>
+  <div class="row">
+    <!-- résultats -->
+  </div>
+</div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script defer src="js/jquery.cookie.js"></script>
