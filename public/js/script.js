@@ -2,13 +2,53 @@
 
 */
 
+// ------------------------------------------------
+// Geolocalisation
+// ------------------------------------------------
 
-
-
-
-
-
-
+// Check if the position is in cookies
+if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude'))
+{
+	// If client support HTML5 Geolocation
+	if (navigator.geolocation) 
+	{
+		var callbackSuccess = function callbackSuccess(position)
+		{
+			$.cookie('coords-latitude', position.coords.latitude, { expires: 1 });
+			$.cookie('coords-longitude', position.coords.longitude, { expires: 1 });
+		};
+		
+		var callbackError = function callbackSuccess(error)
+		{
+			switch(error.code) 
+			{
+				case error.TIMEOUT:
+					alert ('Timeout');
+					break;
+				case error.POSITION_UNAVAILABLE:
+					alert ('Position unavailable');
+					break;
+				case error.PERMISSION_DENIED:
+					alert ('Permission denied');
+					break;
+				case error.UNKNOWN_ERROR:
+					alert ('Unknown error');
+					break;
+			}
+		};
+		
+		navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError);
+	}
+	// finish the error checking if the client is not compliant with the spec
+	else 
+	{
+		alert('Erreur supporte pas HTML 5');
+	}
+}
+else
+{
+	alert($.cookie('coords-latitude') + ' : ' + $.cookie('coords-longitude'));
+}
 
 
 
