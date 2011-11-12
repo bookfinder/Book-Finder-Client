@@ -30,3 +30,7 @@
     #search .more-options .input-prepend {
       float: left;
       margin-right: 12px; }
+
+#results .result-row {
+  background: url(../img/line-arrow.png) no-repeat center right;
+  padding-right: 20px; }
