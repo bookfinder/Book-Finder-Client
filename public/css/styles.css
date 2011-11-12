@@ -32,6 +32,8 @@
       margin-right: 12px; }
 
 #results-loading {
+  display: none;
+  font-size: 16px;
   line-height: 100px;
   height: 100px;
   width: 100%;
