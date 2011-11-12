@@ -13,50 +13,44 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
-
-  <div id="container">
-    <header>
-      Trouver un livre
-    </header>
-    <div id="main" role="main">
-      <form id="form_search" action="">
 <div class="container">
   <div class="page-header">
     <h1>Trouver un livre</h1>
   </div>
-  <div class="row">
+  <form id="form_search" action="/">
+  <div class="row" id="search">
     <div class="span10">
-      <form id="form_search" action="/">
-        <input type="text" name="keywords" id="keywords" />
-        <input type="submit" name="search" id="search">
-      </form>
       <a href="Plus d'options" class="show-options"></a>
+      <input type="text" name="keywords" id="keywords" class="main-field" />
+      <a href="#" class="show-options">Plus d'options</a>
       <div class="options">
-         
+
       </div>
     </div>
     <div class="span4">
-      <div class="results">GO</div>
+      <input type="submit" name="search" id="search" class="btn primary" value="Lancer"/>
     </div>
   </div>
+  </form>
   <div class="row">
     <!-- résultats -->
   </div>
 </div>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script defer src="js/jquery.cookie.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script defer src="js/jquery.cookie.js"></script>
 
-  <script defer src="js/script.js"></script>
+<script defer src="js/script.js"></script>
 
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-  <![endif]-->
+<!--[if lt IE 7 ]>
+  <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+  <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
 
 </body>
 </html>
