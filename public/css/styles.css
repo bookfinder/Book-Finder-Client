@@ -7,6 +7,9 @@
 #hacketon {
   margin-bottom: 20px; }
 
+#about {
+  line-height: 20px; }
+
 #search {
   overflow: hidden;
   position: relative; }
@@ -20,7 +23,7 @@
       float: left;
       margin-right: 12px; }
     #search .main-search .main-field {
-      width: 400px;
+      width: 360px;
       height: 30px; }
   #search .show-options {
     font-size: 11px; }
