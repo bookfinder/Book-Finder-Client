@@ -33,4 +33,28 @@
 
 #results .result-row {
   background: url(../img/line-arrow.png) no-repeat center right;
-  padding-right: 20px; }
+  padding-right: 20px;
+  position: relative;
+  margin-bottom: 12px;
+  padding: 0 0 12px 0; }
+  #results .result-row .availability {
+    position: absolute;
+    right: 60px;
+    top: 20px;
+    display: inline; }
+    #results .result-row .availability .span1 {
+      float: right; }
+  #results .result-row .provider-icon {
+    text-indent: -9999px;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-position: 0 -32px; }
+  #results .result-row .provider-icon.active {
+    background-position: 0 0; }
+  #results .result-row .amazon {
+    background-image: url(../img/provider/amazon.png); }
+  #results .result-row .google {
+    background-image: url(../img/provider/google.png); }
+  #results .result-row .library {
+    background-image: url(../img/provider/library.png); }
