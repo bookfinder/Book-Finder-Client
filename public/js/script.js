@@ -11,26 +11,115 @@ $(function(){
 })
 
 $('#form_search').submit(function(e) {
+	
+  var keywords = $("#keywords").val();
+  var author = $("#author").val();
+  var editor = $("#editor").val();
+  var isbn = $("#isbn").val();
   
-  var url = 'dummy-data.json';
+  /*var url = 'http://book-finder-api.jeansebtr.cloud9ide.com/api/search?';
+  if(keywords) url += 's=' + keywords;
+  if(author) url += 's=' + author;
+  if(editor) url += 's=' + editor;
+  if(isbn) url += 's=' + isbn;*/
+  
+  var url = "search.json";
+  
+  // Show loading
+  $("#results-loading").show();
+  $("div#results").html("");
   
   $.ajax({
+	type: 'GET',
     url: url,
-    dataType: "json",
-    beforeSend: function( xhr ) {
-      console.log("beforeSend");
+    dataType: "json",    
+    success: function(data, status)
+    {
+	  // Hide loading
+	  $("#results-loading").hide();
+	  
+	  if(data && data.success && data.results)
+	  {
+		  var item;
+		  var results = "";
+		  
+		  for(item in data.results)
+		  {
+			  var result = data.results[item];
+			  var resultHTML = "";
+			  
+			  var providers = [];
+			  
+			  if(result.locations)
+			  {
+				  var location;
+				  for(location in result.locations)
+				  {
+					  location = result.locations[location];
+					  
+					  if(location.name)
+					  {
+						  switch(location.name)
+						  {
+							  case 'Amazon':
+								  if(Number(location.price) > 0) providers['amazon'] = "Meilleur prix sur Amazon: " + Number(location.price).toFixed(2);								  
+							  break;
+							  case 'Google':
+								  providers['google'] = "Disponible sur Google Books";								  
+							  break;
+							  default:
+								  if(location.distance) providers["library"] = "Disponible à la bibliothèque " +  location.name + " (" + location.distance + " km)";								  
+							  break;
+						  }
+					  }
+				  }
+			  }
+			  
+				// Result line
+				resultHTML += '<div class="row result-row breadcrumb" isbn="' + result.isbn + '">';
+				resultHTML += '<div class="span15"><h3>' + result.title + '</h3></div>';
+				resultHTML += '<div class="span12">' + result.author + ' ' + result.year + '</div>';
+				resultHTML += '<div class="availability">';
+				  
+			  	var provider;console.log(providers);
+			  	for(provider in providers)
+			  	{
+			  		var providerText = providers[provider];
+			  		
+			  		resultHTML += '<div class="span1">';
+				  	resultHTML += '<span class="provider-icon '+provider+'" title="'+providerText+'">B</span>';
+				  	resultHTML += '</div>';
+				}				  
+						  
+				 resultHTML += '</div>';
+				 resultHTML += '</div>';
+				 
+				 // Add to the result list
+				 results += resultHTML;
+		  }
+		  
+		  if(results == "")
+		  {
+			  results = "<div class='alert-message warning'>Aucun résultat trouvé.</div>";
+		  }
+		  
+		  $("div#results").html(results);
+	  }
+	  else
+	  {
+		  // Parse error
+		  $("div#results").html("<div class='alert-message error'>Erreur serveur</div>");
+	  }
     },
-    
-    success: function(data, status){
-      console.dir(data);
-      for(item in data.results){
-        console.dir(data.results[item]);
-      }
-      
-    },
-    error: function(XHR, textStatus, errorThrown){
-      console.log(textStatus);
-      console.log(errorThrown);
+    error: function(XHR, textStatus, errorThrown)
+    {
+    	// Hide loading
+  	  	$("#results-loading").hide();
+  	  	
+  	  	// TODO: Show human-readable message
+  	  	
+  	  	// Show error message
+    	$("div#results").html("<div class='alert-message error'>" + textStatus + "</div>");
     }
   });
   
