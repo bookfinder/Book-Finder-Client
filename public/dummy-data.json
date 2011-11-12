@@ -1,0 +1,40 @@
+{
+  "success" : "true",
+  "total" : "3",
+  "result" :[
+  {
+    "ISBN-13" : "978-2070612369",
+    "tilte" : "Harry Potter a L'ecole des sorciers",
+    "author" : "JOANNE KATHLEEN ROWLING",
+    "year" : "2007",
+    "amazon": "14.20",
+    "librairy" : {
+      "name" : "st-albert",
+      "distance" : "5.7"
+    }
+  },
+  {
+    "ISBN-13" : "978-2070612376",
+    "tilte" : "Harry Potter et la chambre des secrets",
+    "author" : "JOANNE KATHLEEN ROWLING",
+    "year" : "2007",
+    "amazon": "14.20",
+    "librairy" : {
+      "name" : "st-albert",
+      "distance" : "5.7"
+    }
+  },
+  {
+    "ISBN-13" : "978-2070541300",
+    "tilte" : "Harry Potter et le prisonnier d'Azkaban",
+    "author" : "JOANNE KATHLEEN ROWLING",
+    "year" : "2007",
+    "amazon": "14.20",
+    "google_book" : "7.99",
+    "librairy" : {
+      "name" : "st-albert",
+      "distance" : "5.7"
+    }
+  }
+  ]
+}
