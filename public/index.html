@@ -20,20 +20,31 @@
 <body>
 <div class="container">
   <div class="page-header">
+    <img src="img/header.png" alt="Hacketon" id="hacketon" />
     <h1>Trouver un livre</h1>
   </div>
   <form id="form_search" action="/">
   <div class="row" id="search">
-    <div class="span10">
-      <a href="Plus d'options" class="show-options"></a>
-      <input type="text" name="keywords" id="keywords" class="main-field" />
-      <a href="#" class="show-options">Plus d'options</a>
-      <div class="options">
-
+    <div class="span12">
+      <div class="main-search">
+        <input type="text" name="keywords" id="keywords" class="main-field" />
+        <input type="submit" name="search" id="search" class="btn primary" value="Lancer"/>
       </div>
-    </div>
-    <div class="span4">
-      <input type="submit" name="search" id="search" class="btn primary" value="Lancer"/>
+      <div><a href="#" class="show-options">Plus d'options »</a></div>
+      <div class="more-options">     
+        <div class="input-prepend">
+          <span class="add-on">Auteur</span>
+          <input class="small" id="author" name="author" size="16" type="text">
+        </div>       
+        <div class="input-prepend">
+          <span class="add-on">Éditeur</span>
+          <input class="small" id="editor" name="editor" size="16" type="text">
+        </div>       
+        <div class="input-prepend">
+          <span class="add-on">ISBN</span>
+          <input class="small" id="isbn" name="isbn" size="16" type="text">
+        </div>
+      </div>
     </div>
   </div>
   </form>
@@ -42,7 +53,7 @@
   </div>
 </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script defer src="js/jquery.cookie.js"></script>
 
 <script defer src="js/script.js"></script>

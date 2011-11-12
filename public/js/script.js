@@ -2,6 +2,14 @@
 
  */
 
+$(function(){
+	$('#search .more-options').hide()
+	$('#search .show-options').click(function()
+	{
+		$('#search .more-options').toggle('fade')
+	})
+})
+
 $('#form_search').submit(function(e) {
   
   var url = 'dummy-data.json';

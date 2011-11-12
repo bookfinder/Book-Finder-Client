@@ -1,14 +1,50 @@
 .container
 {
 	padding-top:30px;
+	.span12
+	{
+		overflow:hidden;
+		position:relative;
+	}
+}
+#hacketon
+{
+	margin-bottom:20px;
 }
 #search
 {
-	.main-field
+	overflow:hidden;
+	position:relative;
+	.main-search
 	{
-		font-size:20px;
-		width:400px;
-		height:30px;
-		line-height:30px;
+		overflow:hidden;
+		position:relative;
+		margin-bottom:4px;
+		input
+		{
+			line-height:30px;
+			font-size:20px;
+			float:left;
+			margin-right:12px;
+		}
+		.main-field
+		{
+			width:400px;
+			height:30px;
+		}
+	}
+	.show-options
+	{
+		font-size:11px;
+	}
+	.more-options
+	{
+		padding-top:4px;
+		display:none;
+		.input-prepend
+		{
+			float:left;
+			margin-right:12px;
+		}
 	}
 }

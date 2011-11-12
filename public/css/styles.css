@@ -1,8 +1,32 @@
 .container {
   padding-top: 30px; }
+  .container .span12 {
+    overflow: hidden;
+    position: relative; }
 
-#search .main-field {
-  font-size: 20px;
-  width: 400px;
-  height: 30px;
-  line-height: 30px; }
+#hacketon {
+  margin-bottom: 20px; }
+
+#search {
+  overflow: hidden;
+  position: relative; }
+  #search .main-search {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 4px; }
+    #search .main-search input {
+      line-height: 30px;
+      font-size: 20px;
+      float: left;
+      margin-right: 12px; }
+    #search .main-search .main-field {
+      width: 400px;
+      height: 30px; }
+  #search .show-options {
+    font-size: 11px; }
+  #search .more-options {
+    padding-top: 4px;
+    display: none; }
+    #search .more-options .input-prepend {
+      float: left;
+      margin-right: 12px; }
