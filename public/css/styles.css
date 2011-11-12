@@ -69,3 +69,6 @@
     background-image: url(../img/provider/google.png); }
   #results .result-row .library {
     background-image: url(../img/provider/library.png); }
+
+#results-title {
+  font-size: 18px; }
