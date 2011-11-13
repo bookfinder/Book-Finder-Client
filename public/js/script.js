@@ -7,7 +7,7 @@ $(function(){
 	$('#search .show-options').click(function()
 	{
 		$('#search .more-options').toggle('fade')
-	})
+	});
 })
 
 $('#form_search').submit(function(e) {
@@ -18,14 +18,11 @@ $('#form_search').submit(function(e) {
   var isbn = $("#isbn").val();
   
   var url = 'http://localhost:1234/api/search?';
+  //var url = 'http://book-finder-api.jeansebtr.cloud9ide.com/api/search?';
   if(keywords) url += 's=' + keywords;
   /*if(author) url += 's=' + author;
   if(editor) url += 's=' + editor;
   if(isbn) url += 's=' + isbn;*/
-  
-  //console.log(keywords);
-  
-  //var url = "search.json";
   
   // Show loading
   $("#results-loading").show();
@@ -50,7 +47,7 @@ $('#form_search').submit(function(e) {
 			  var result = data.results[item];
 			  var resultHTML = "";
 			  
-			  var providers = [];
+			  var providers = {'google':null, 'amazon':null, 'library':null};
 			  
 			  if(result.locations)
 			  {
@@ -64,7 +61,7 @@ $('#form_search').submit(function(e) {
 						  switch(location.name)
 						  {
 							  case 'Amazon':
-								  if(Number(location.price) > 0) providers['amazon'] = "Meilleur prix sur Amazon: " + Number(location.price).toFixed(2);								  
+								  if(Number(location.price) > 0) providers['amazon'] = "Meilleur prix sur Amazon: " + Number(location.price).toFixed(2) + ' $';								  
 							  break;
 							  case 'Google':
 								  providers['google'] = "Disponible sur Google Books";								  
@@ -83,14 +80,23 @@ $('#form_search').submit(function(e) {
 				resultHTML += '<div class="span12">' + result.author + ' ' + result.year + '</div>';
 				resultHTML += '<div class="availability">';
 				  
-			  	var provider;console.log(providers);
+			  	var provider;
 			  	for(provider in providers)
 			  	{
 			  		var providerText = providers[provider];
 			  		
 			  		resultHTML += '<div class="span1">';
-				  	resultHTML += '<span class="provider-icon '+provider+'" title="'+providerText+'">B</span>';
-				  	resultHTML += '</div>';
+			  		
+			  		if(providerText)
+			  		{			  			
+					  	resultHTML += '<span class="provider-icon '+provider+' active" title="'+providerText+'"></span>';					  	
+			  		}
+			  		else
+			  		{
+			  			resultHTML += '<span class="provider-icon '+provider+'"></span>';			  	
+			  		}
+			  		
+			  		resultHTML += '</div>';			  		
 				}				  
 						  
 				 resultHTML += '</div>';
@@ -106,6 +112,7 @@ $('#form_search').submit(function(e) {
 		  }
 		  
 		  $("div#results").html(results);
+		  $('.provider-icon').twipsy();
 	  }
 	  else
 	  {
