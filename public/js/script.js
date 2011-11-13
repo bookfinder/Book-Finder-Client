@@ -17,13 +17,15 @@ $('#form_search').submit(function(e) {
   var editor = $("#editor").val();
   var isbn = $("#isbn").val();
   
-  /*var url = 'http://book-finder-api.jeansebtr.cloud9ide.com/api/search?';
+  var url = 'http://localhost:1234/api/search?';
   if(keywords) url += 's=' + keywords;
-  if(author) url += 's=' + author;
+  /*if(author) url += 's=' + author;
   if(editor) url += 's=' + editor;
   if(isbn) url += 's=' + isbn;*/
   
-  var url = "search.json";
+  //console.log(keywords);
+  
+  //var url = "search.json";
   
   // Show loading
   $("#results-loading").show();
