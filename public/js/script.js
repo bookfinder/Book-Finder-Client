@@ -1,5 +1,4 @@
 /* Author: 
-
  */
 
 $(function(){
@@ -16,8 +15,14 @@ $('#form_search').submit(function(e) {
   var author = $("#author").val();
   var editor = $("#editor").val();
   var isbn = $("#isbn").val();
-  
+
+
+  // Pour les gens normaux:
+  //var url = 'http://localhost:6000/api/search?';
+  // Pour le reste
   var url = 'http://book-finder-api.jeansebtr.cloud9ide.com/api/search?';
+
+
   if(keywords) url += 's=' + keywords;
   /*if(author) url += 's=' + author;
   if(editor) url += 's=' + editor;
@@ -36,37 +41,30 @@ $('#form_search').submit(function(e) {
 	  // Hide loading
 	  $("#results-loading").hide();
 	  
-	  if(data && data.success && data.results)
-	  {
+	  if(data && data.success && data.results) {
 		  var item;
 		  var results = "";
 		  
-		  for(item in data.results)
-		  {
+		  for(item in data.results) {
 			  var result = data.results[item];
 			  var resultHTML = "";
 			  
 			  var providers = {'google':null, 'amazon':null, 'library':null};
 			  
-			  if(result.locations)
-			  {
+			  if(result.locations) {
 				  var location;
-				  for(location in result.locations)
-				  {
+				  for(location in result.locations) {
 					  location = result.locations[location];
-					  
-					  if(location.name)
-					  {
-						  switch(location.name)
-						  {
+					  if(location.name) {
+						  switch(location.name) {
 							  case 'Amazon':
-								  if(Number(location.price) > 0) providers['amazon'] = "Meilleur prix sur Amazon: " + Number(location.price).toFixed(2) + ' $';								  
+								  if(Number(location.price) > 0) providers['amazon'] = "Meilleur prix sur Amazon: " + Number(location.price).toFixed(2) + ' $';
 							  break;
 							  case 'Google':
-								  providers['google'] = "Disponible sur Google Books";								  
+								  providers['google'] = "Disponible sur Google Books";
 							  break;
 							  default:
-								  if(location.distance) providers["library"] = "Disponible à la bibliothèque " +  location.name + " (" + location.distance + " km)";								  
+								  if(location.distance) providers["library"] = "Disponible à la bibliothèque " +  location.name + " (" + location.distance + " km)";
 							  break;
 						  }
 					  }
@@ -80,19 +78,15 @@ $('#form_search').submit(function(e) {
 				resultHTML += '<div class="availability">';
 				  
 			  	var provider;
-			  	for(provider in providers)
-			  	{
+			  	for(provider in providers) {
 			  		var providerText = providers[provider];
 			  		
 			  		resultHTML += '<div class="span1">';
 			  		
-			  		if(providerText)
-			  		{			  			
-					  	resultHTML += '<span class="provider-icon '+provider+' active" title="'+providerText+'"></span>';					  	
-			  		}
-			  		else
-			  		{
-			  			resultHTML += '<span class="provider-icon '+provider+'"></span>';			  	
+			  		if(providerText) {
+					  	resultHTML += '<span class="provider-icon '+provider+' active" title="'+providerText+'"></span>';
+			  		} else {
+			  			resultHTML += '<span class="provider-icon '+provider+'"></span>';
 			  		}
 			  		
 			  		resultHTML += '</div>';			  		
@@ -105,22 +99,18 @@ $('#form_search').submit(function(e) {
 				 results += resultHTML;
 		  }
 		  
-		  if(results == "")
-		  {
+		  if(results == "") {
 			  results = "<div class='alert-message warning'>Aucun résultat trouvé.</div>";
 		  }
 		  
 		  $("div#results").html(results);
 		  $('.provider-icon').twipsy();
-	  }
-	  else
-	  {
+	  } else {
 		  // Parse error
 		  $("div#results").html("<div class='alert-message error'>Erreur serveur</div>");
 	  }
     },
-    error: function(XHR, textStatus, errorThrown)
-    {
+    error: function(XHR, textStatus, errorThrown) {
     	// Hide loading
   	  	$("#results-loading").hide();
   	  	
@@ -135,8 +125,7 @@ $('#form_search').submit(function(e) {
 });
 
 $(function(){
-	$('.provider-icon').each(function()
-	{
+	$('.provider-icon').each(function() {
 		$(this).twipsy();		
 	});
 	
@@ -147,21 +136,16 @@ $(function(){
 // ------------------------------------------------
 
 // Check if the position is in cookies
-if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude'))
-{
+if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude')) {
 	// If client support HTML5 Geolocation
-	if (navigator.geolocation) 
-	{
-		var callbackSuccess = function callbackSuccess(position)
-		{
+	if (navigator.geolocation) {
+		var callbackSuccess = function callbackSuccess(position) {
 			$.cookie('coords-latitude', position.coords.latitude, { expires: 1 });
 			$.cookie('coords-longitude', position.coords.longitude, { expires: 1 });
 		};
 		
-		var callbackError = function callbackSuccess(error)
-		{
-			switch(error.code) 
-			{
+		var callbackError = function callbackSuccess(error) {
+			switch(error.code) {
 				case error.TIMEOUT:
 					alert ('Timeout');
 					break;
@@ -180,28 +164,9 @@ if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude'))
 		navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError);
 	}
 	// finish the error checking if the client is not compliant with the spec
-	else 
-	{
+	else {
 		alert('Erreur supporte pas HTML 5');
 	}
-}
-else
-{
+} else {
 	//alert($.cookie('coords-latitude') + ' : ' + $.cookie('coords-longitude'));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
