@@ -41,6 +41,8 @@ $('#form_search').submit(function(e) {
 	  {
 		  var item;
 		  var results = "";
+                  
+                  $('#results-title').text((data.total) ? data.total + ' resultats' : 0 + 'resultat');
 		  
 		  for(item in data.results)
 		  {
