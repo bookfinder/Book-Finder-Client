@@ -1,10 +1,9 @@
-/* Author: 
-
- */
-
+//------------------------------------------------
+// Internationalization
+//------------------------------------------------
 $.tr.dictionary(dictionnary);
 
-//var lg = $.tr.language();
+// TODO: Manage language selection
 var lg = 'fr';
 
 // 2. Language selection.
@@ -13,27 +12,26 @@ $.tr.language(lg, false);
 // 3. Use.
 var tr = $.tr.translator();
 
+// Stuff to do when dom ready
+$(function()
+{console.log($('.row').size());
+	// Translate static string
+	$('.translate').each(function()
+	{console.log('AA');
+		var index = $(this).html();console.log(index);
+		
+		$(this).html(tr(index));
+	});
+});
 
-$(function(){
-  $('#search .more-options').hide()
-  $('#search .show-options').click(function()
-  {
-    $('#search .more-options').toggle('fade')
-  });
-})
-
+//------------------------------------------------
+// Search form
+//------------------------------------------------
 $('#form_search').submit(function(e) {
 	
   var keywords = $("#keywords").val();
-  var author = $("#author").val();
-  var editor = $("#editor").val();
-  var isbn = $("#isbn").val();
   
-
   var url = 'http://hackathonqc.librarieshub.com/api/search?s=' + keywords;
-  if(author) url += '&author=' + author;
-  if(editor) url += '&editor=' + editor;
-  if(isbn) url += '&isbn=' + isbn;
   
   // Geolocalisation
   if($.cookie('coords-latitude')) url += '&lat=' + $.cookie('coords-latitude');
@@ -133,7 +131,7 @@ $('#form_search').submit(function(e) {
         }
 		  
         $("div#results").html(results);
-        $('.provider-icon').twipsy();
+        $('.provider-icon', $("div#results")).twipsy();
       }
       else
       {
@@ -154,14 +152,6 @@ $('#form_search').submit(function(e) {
   });
   
   return false;
-});
-
-$(function(){
-  $('.provider-icon').each(function()
-  {
-    $(this).twipsy();		
-  });
-	
 });
 
 // ------------------------------------------------
@@ -186,22 +176,3 @@ if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude'))
 	   navigator.geolocation.getCurrentPosition(callbackSuccess, null);
   }
 }
-
-console.log($.tr.language());
-console.dir(dictionnary);
-$('#about').text(tr('Find a book ..... Amazon , Google'));
-
-
-
-
-//alert(tr('Welcome &1!', 'John Doe'));
-
-
-
-
-
-
-
-
-
-
