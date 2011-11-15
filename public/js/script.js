@@ -17,7 +17,7 @@ $('#form_search').submit(function(e) {
   var editor = $("#editor").val();
   var isbn = $("#isbn").val();
   
-  var url = 'http://book-finder-api.jeansebtr.cloud9ide.com/api/search?';
+  var url = 'http://bookfinder-api.herokuapp.com/api/search?';
   if(keywords) url += 's=' + keywords;
   /*if(author) url += 's=' + author;
   if(editor) url += 's=' + editor;
@@ -32,7 +32,7 @@ $('#form_search').submit(function(e) {
     url: url,
     dataType: "json",    
     success: function(data, status)
-    {
+    {	  
 	  // Hide loading
 	  $("#results-loading").hide();
 	  
