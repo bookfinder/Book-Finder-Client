@@ -9,19 +9,19 @@ var lg = 'fr';
 // 2. Language selection.
 $.tr.language(lg, false);
 
-// 3. Use.
+// 3. shortcut
 var tr = $.tr.translator();
 
 // Stuff to do when dom ready
 $(function()
-{console.log($('.row').size());
-	// Translate static string
-	$('.translate').each(function()
-	{console.log('AA');
-		var index = $(this).html();console.log(index);
+{
+  // Translate static string
+  $('.translate').each(function()
+  {
+    var index = $(this).html();
 		
-		$(this).html(tr(index));
-	});
+    $(this).html(tr(index));
+  });
 });
 
 //------------------------------------------------
@@ -74,19 +74,41 @@ $('#form_search').submit(function(e) {
             for(location in result.locations)
             {
               location = result.locations[location];
-					  
-              if(location.name)
+              
+              if(location.type)
               {
-                switch(location.name)
+                switch(location.type)
                 {
-                  case 'Amazon':
-                    if(Number(location.price) > 0) providers['amazon'] = tr('Best price on Amazon : $&1', Number(location.price).toFixed(2));								  
+                  case 'webStore':
+                    if(location.name)
+                    {
+                      switch(location.name)
+                      {
+                        case 'Amazon':
+                          console.log('amazon');
+                          if(location.price && location.price.amount) 
+                          {
+                            var amount = location.price.amount.substr(0, location.price.amount.length - 2) + '.' + location.price.amount.substr(location.price.amount.length - 2, 2);
+                            
+                            providers['amazon'] = tr('Best price on Amazon : $&1', Number(amount).toFixed(2));
+                          }
+                          break;
+                        case 'Google':
+                          providers['google'] = tr('Available on Google Book');
+                          break;
+                      }
+                    }
                     break;
-                  case 'Google':
-                    providers['google'] = tr('Available on Google Book');								  
-                    break;
-                  default:
-                    if(location.distance) providers["library"] = tr('Available at &1 library (&2 km)', location.name, location.distance);								  
+                    
+                  case 'library':
+                    if(location.name && location.distance)
+                    {
+                      providers["library"] = tr('Available at &1 library (&2 km)', location.name, location.distance);
+                    }
+                    else if(location.name)
+                    {
+                      providers["library"] = tr('Available at &1 library', location.name);
+                    }
                     break;
                 }
               }
@@ -100,6 +122,8 @@ $('#form_search').submit(function(e) {
           resultHTML += '<div class="availability">';
 				  
           var provider;
+          console.dir(providers);
+          
           for(provider in providers)
           {
             var providerText = providers[provider];
@@ -164,15 +188,15 @@ if(!$.cookie('coords-latitude') || !$.cookie('coords-longitude'))
   // If client support HTML5 Geolocation
   if (navigator.geolocation) 
   {
-	  var callbackSuccess = function callbackSuccess(position)
-	    {
-	      $.cookie('coords-latitude', position.coords.latitude, {
-	        expires: 1
-	      });
-	      $.cookie('coords-longitude', position.coords.longitude, {
-	        expires: 1
-	      });
-	    };
-	   navigator.geolocation.getCurrentPosition(callbackSuccess, null);
+    var callbackSuccess = function callbackSuccess(position)
+    {
+      $.cookie('coords-latitude', position.coords.latitude, {
+        expires: 1
+      });
+      $.cookie('coords-longitude', position.coords.longitude, {
+        expires: 1
+      });
+    };
+    navigator.geolocation.getCurrentPosition(callbackSuccess, null);
   }
 }
