@@ -85,16 +85,22 @@ $('#form_search').submit(function(e) {
                       switch(location.name)
                       {
                         case 'Amazon':
-                          console.log('amazon');
+                          console.dir(result);
                           if(location.price && location.price.amount) 
                           {
                             var amount = location.price.amount.substr(0, location.price.amount.length - 2) + '.' + location.price.amount.substr(location.price.amount.length - 2, 2);
-                            
-                            providers['amazon'] = tr('Best price on Amazon : $&1', Number(amount).toFixed(2));
+                            var obj = {
+                              msg:tr('Best price on Amazon : $&1', Number(amount).toFixed(2)),
+                              url: "http://www.amazon.com/"
+                            };
+                            if(location.link){
+                              obj.url = location.link; 
+                            }
+                            providers['amazon'] = obj;
                           }
                           break;
                         case 'Google':
-                          providers['google'] = tr('Available on Google Book');
+                          providers['google'].msg = tr('Available on Google Book');
                           break;
                       }
                     }
@@ -103,11 +109,17 @@ $('#form_search').submit(function(e) {
                   case 'library':
                     if(location.name && location.distance)
                     {
-                      providers["library"] = tr('Available at &1 library (&2 km)', location.name, location.distance);
+                      var obj = {
+                        msg:tr('Available at &1 library (&2 km)', location.name, location.distance)
+                      };
+                      providers["library"] = obj;
                     }
                     else if(location.name)
                     {
-                      providers["library"] = tr('Available at &1 library', location.name);
+                      var obj = {
+                        msg:tr('Available at &1 library', location.name)
+                      };
+                      providers["library"] = obj;
                     }
                     break;
                 }
@@ -122,24 +134,39 @@ $('#form_search').submit(function(e) {
           resultHTML += '<div class="availability">';
 				  
           var provider;
-          console.dir(providers);
           
           for(provider in providers)
           {
-            var providerText = providers[provider];
+            
+            var providerText = false;
+            if(providers[provider] && providers[provider].msg)
+            {
+                providerText = providers[provider].msg;
+            }
 			  		
             resultHTML += '<div class="span1">';
 			  		
             if(providerText)
-            {			  			
-              resultHTML += '<span class="provider-icon '+provider+' active" title="'+providerText+'"></span>';					  	
+            {	
+              if(providers[provider].url)
+              {
+                resultHTML += '<a target="_blank" href='+providers[provider].url+'>';
+              }
+              resultHTML += '<span class="provider-icon '+provider+' active" title="'+providerText+'"></span>';	
+              if(providers[provider].url)
+              {
+                resultHTML += '</a>';
+              }
+              
+              				  	
             }
             else
             {
               resultHTML += '<span class="provider-icon '+provider+'"></span>';			  	
             }
 			  		
-            resultHTML += '</div>';			  		
+            resultHTML += '</div>';  
+            			  		
           }				  
 						  
           resultHTML += '</div>';
